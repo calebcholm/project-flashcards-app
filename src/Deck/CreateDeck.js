@@ -24,6 +24,7 @@ export default function CreateDeck() {
 
   const handleReset = () => {
     setFormData({ ...initialState });
+    history.push('/');
   };
 
   const handleSubmit = (event) => {
@@ -98,7 +99,7 @@ export default function CreateDeck() {
           >
             Cancel
           </button>
-          <button type="submit" className="btn btn-primary m-2">
+          <button type="submit" onClick={handleSubmit} className="btn btn-primary m-2">
             Submit
           </button>
         </form>

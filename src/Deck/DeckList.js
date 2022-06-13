@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import Deck from './Deck';
 
 export const DeckList = ({ decks, deleteDeck }) => {
 
@@ -9,7 +8,6 @@ export const DeckList = ({ decks, deleteDeck }) => {
             <Link to='/decks/new' className="btn btn-secondary">Create Deck</Link>
             {decks.map((deck, index) => (
                 <div className="card w-100 my-4" key={index}>
-                    <Deck deck={deck} index={index} />
                     <div className="card-body">
                         <div className="row">
                             <div className="col-9">
