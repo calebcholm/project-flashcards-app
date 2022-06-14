@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Fragment } from "react";
-import { deleteDeck, listDecks } from "../utils/api";
+import { listDecks } from "../utils/api";
 import Header from "./Header";
 import CreateDeck from "../Deck/CreateDeck";
 import Deck from "../Deck/Deck";
@@ -36,8 +36,6 @@ function Layout() {
     );
   };
 
-
-
   return (
     <Fragment>
       <Header />
@@ -50,7 +48,7 @@ function Layout() {
             <DeckList decks={ decks } />
           </Route>
           <Route path='/decks/:deckId'>
-            <Deck decks={decks} deleteDeck={deleteDeck} />
+            <Deck decks={ decks } />
           </Route>
           <Route>
             <NotFound />

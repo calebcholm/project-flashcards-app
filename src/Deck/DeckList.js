@@ -1,7 +1,8 @@
 import React from "react";
+import { DeleteDeck } from "./DeleteDeck";
 import { Link } from 'react-router-dom';
 
-export const DeckList = ({ decks, deleteDeck }) => {
+export const DeckList = ({ decks }) => {
 
     return (
         <div>
@@ -23,7 +24,7 @@ export const DeckList = ({ decks, deleteDeck }) => {
                                     <Link to={`/decks/${deck.id}/study`} className='btn btn-primary'>Study</Link>
                                 </div>
                                 <div className='row'>
-                                    <div className='btn btn-danger' onClick={deleteDeck}>Delete</div>
+                                    <DeleteDeck deck={deck}/>
                                 </div>
                             </div>
                         </div>

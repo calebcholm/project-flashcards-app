@@ -41,6 +41,7 @@ export default function CreateDeck() {
   useEffect(() => {
     if (formData.id) {
       history.push(`/decks/${formData.id}`);
+      window.location.reload();
     }
   }, [formData.id, history]);
 
