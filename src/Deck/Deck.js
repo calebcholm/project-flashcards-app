@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import { Link, useParams } from 'react-router-dom';
 import { DeleteDeck } from './DeleteDeck';
 
@@ -6,9 +7,8 @@ import { DeleteDeck } from './DeleteDeck';
 //Routes to '/decks/:deckId'
 //Shows all of the information about a specified deck with options to edit or add cards to the deck, navigate to the study screen or delete the deck
 
-export default function Deck({ decks }) {
+export default function Deck({ deck }) {
     const { deckId } = useParams();
-    const deck = decks.find((deck) => deck.id === Number(deckId));
 
     return (
         <div>
@@ -30,7 +30,12 @@ export default function Deck({ decks }) {
                         <p className='card-text'>{deck.description}</p>
                         <div className='row'>
                             <div className='col'>
-                                <Link to={`/decks/${deck.id}/study`} className='btn btn-primary'>Study</Link>
+                                <Route>
+                                <Link to={`/decks/${deckId}`} className='btn btn-secondary'>View</Link>
+                                </Route>
+                                <Route>
+                                <Link to={`/decks/${deckId}/study`} className='btn btn-primary'>Study</Link>
+                                </Route>
                             </div>
                             <div className='row'>
                                 <div>
