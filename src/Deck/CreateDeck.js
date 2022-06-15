@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { createDeck } from "../utils/api";
+import ViewDeck from "./ViewDeck";
 import ErrorMessage from "../Layout/ErrorMessage";
 
 export default function CreateDeck() {
@@ -42,12 +43,14 @@ export default function CreateDeck() {
     if (formData.id) {
       history.push(`/decks/${formData.id}`);
       window.location.reload();
+      return <ViewDeck />;
     }
   }, [formData.id, history]);
 
   if (error) {
     return <ErrorMessage error={error} />;
   }
+
   if (formData)
     return (
       <div>

@@ -2,6 +2,8 @@ import React, { useEffect, useState, Fragment } from "react";
 import { listDecks } from "../utils/api";
 import Header from "./Header";
 import CreateDeck from "../Deck/CreateDeck";
+import ViewDeck from "../Deck/ViewDeck";
+import Study from "./Study";
 import ErrorMessage from "./ErrorMessage";
 import DeckList from "../Deck/DeckList";
 import NotFound from "./NotFound";
@@ -45,6 +47,12 @@ function Layout() {
           </Route>
           <Route exact path='/'>
             <DeckList decks={ decks } />
+          </Route>
+          <Route exact path='/decks/:deckId'>
+            <ViewDeck decks={ decks } />
+          </Route>
+          <Route exact path='/decks/:deckId/study'>
+            <Study />
           </Route>
           <Route>
             <NotFound />

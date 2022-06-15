@@ -1,15 +1,19 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { DeleteDeck } from './DeleteDeck';
+import React from "react";
+import { Link, useParams } from 'react-router-dom';
+import { DeleteDeck } from "./DeleteDeck";
 
-
-//Routes to '/decks/:deckId'
-//Shows all of the information about a specified deck with options to edit or add cards to the deck, navigate to the study screen or delete the deck
-
-export default function Deck({ deck }) {
+function ViewDeck({ decks }) {
+    const {deckId} = useParams();
+    const deck = decks.find((deck) => deck.id === Number(deckId));
 
     return (
         <div>
+            <nav aria-label='breadcrumb'>
+                <ol className='breadcrumb'>
+                    <li className='breadcrumb-item'><Link to='/'>Home</Link></li>
+                    <li className='breadcrumb-item active' aria-current='page'>{`${deck.name}`}</li>
+                </ol>
+            </nav>
             <div className="card w-100 my-4">
                 <div className="card-body">
                     <div className="row">
@@ -22,7 +26,7 @@ export default function Deck({ deck }) {
                         <p className='card-text'>{deck.description}</p>
                         <div className='row'>
                             <div className='col'>
-                                <Link to={`/decks/${deck.id}`} className='btn btn-secondary mr-2 fas fa-eye'>View</Link>
+                                <Link to={`/decks/${deck.id}/edit`} className='btn btn-secondary mr-2'>Edit</Link>
                                 <Link to={`/decks/${deck.id}/study`} className='btn btn-primary'>Study</Link>
                             </div>
                             <div className='row'>
@@ -35,3 +39,5 @@ export default function Deck({ deck }) {
         </div>
     )
 }
+
+export default ViewDeck;

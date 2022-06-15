@@ -6,7 +6,15 @@ import { readDeck } from '../utils/api';
 //Allows the user to study the cards from a specified deck
 
 function Study() {
-    const [deck, setDeck] = useState([]);
+
+    return (
+        <div>Study Component</div>
+    )
+}
+
+export default Study;
+
+/*const [deck, setDeck] = useState([]);
 
     useEffect(() => {
         setDeck([]);
@@ -31,10 +39,4 @@ function Study() {
           </ErrorMessage>
         );
       };
-
-    return (
-        <button>Study Component</button>
-    )
-}
-
-export default Study;
+      */
