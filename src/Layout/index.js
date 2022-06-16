@@ -2,12 +2,15 @@ import React, { useEffect, useState, Fragment } from "react";
 import { listDecks } from "../utils/api";
 import Header from "./Header";
 import CreateDeck from "../Deck/CreateDeck";
-import ViewDeck from "../Deck/ViewDeck";
+import EditDeck from "../Deck/EditDeck";
+import AddCard from "../Card/AddCard";
+import EditCard from "../Card/EditCard";
 import Study from "./Study";
 import ErrorMessage from "./ErrorMessage";
 import DeckList from "../Deck/DeckList";
 import NotFound from "./NotFound";
 import { Route, Link, Switch } from 'react-router-dom';
+import Deck from "../Deck/Deck";
 
 function Layout() {
   const [decks, setDecks] = useState([]);
@@ -48,8 +51,17 @@ function Layout() {
           <Route exact path='/'>
             <DeckList decks={ decks } />
           </Route>
-          <Route exact path='/decks/:deckId'>
-            <ViewDeck decks={ decks } />
+          <Route path='/decks/:deckId'>
+            <Deck />
+          </Route>
+          <Route path='/decks/:deckId/edit'>
+            <EditDeck />
+          </Route>
+          <Route path='/decks/:deckId/cards/:cardId/edit'>
+            <EditCard />
+          </Route>
+          <Route path='/decks/:deckId/cards/new'>
+            <AddCard />
           </Route>
           <Route exact path='/decks/:deckId/study'>
             <Study />

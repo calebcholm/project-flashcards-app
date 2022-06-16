@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { createDeck } from "../utils/api";
-import ViewDeck from "./ViewDeck";
 import ErrorMessage from "../Layout/ErrorMessage";
 
 export default function CreateDeck() {
@@ -30,20 +29,15 @@ export default function CreateDeck() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const abortController = new AbortController();
 
-    createDeck(formData, abortController.signal)
+    createDeck(formData)
       .then((data) => setFormData(data))
       .catch(setError);
-
-    return () => abortController.abort();
   };
 
   useEffect(() => {
     if (formData.id) {
       history.push(`/decks/${formData.id}`);
-      window.location.reload();
-      return <ViewDeck />;
     }
   }, [formData.id, history]);
 
