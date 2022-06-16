@@ -1,14 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, Link, useParams } from "react-router-dom";
-import { createDeck } from "../utils/api";
+import { useHistory, useParams } from "react-router-dom";
+import { createCard, readDeck } from "../utils/api";
 import ErrorMessage from "../Layout/ErrorMessage";
+import Nav from "../Layout/Nav";
 
 export default function AddCard() {
     const { deckId } = useParams();
+    const [deck, setDeck] = useState({});
+
+    useEffect(() => {
+        async function getDeck() {
+            if (deckId) {
+                const foundDeck = await readDeck(deckId);
+                setDeck(foundDeck);
+            }
+        }
+        getDeck();
+    }, [deckId]);
 
     const initialState = {
-        name: "",
-        description: "",
+        front: "",
+        back: "",
+        deckId: deckId,
+        id: 0,
     };
 
     const [formData, setFormData] = useState({ ...initialState });
@@ -32,16 +46,16 @@ export default function AddCard() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        createDeck(formData)
-            .then((data) => setFormData(data))
+        async function addCard() {
+            await createCard(deckId, formData)
+            .then(() => alert(`Card in '${deck.name}' saved! Add another or click Done.`))
+            .then((data) => setFormData({ ...initialState }))
             .catch(setError);
+        }
+        addCard();
     };
 
-    useEffect(() => {
-        if (formData.id) {
-            history.push(`/decks/${formData.id}`);
-        }
-    }, [formData.id, history]);
+    
 
     if (error) {
         return <ErrorMessage error={error} />;
@@ -50,46 +64,35 @@ export default function AddCard() {
     if (formData)
         return (
             <div>
-                <nav aria-label="breadcrumb">
-                    <ol className="breadcrumb">
-                        <li className="breadcrumb-item">
-                            <Link to="/">
-                                <span className="oi oi-home" /> Home
-                            </Link>
-                        </li>
-                        <li className="breadcrumb-item active" aria-current="page">
-                            Create Deck
-                        </li>
-                    </ol>
-                </nav>
-                <h1>Create Deck</h1>
+                <Nav link={`/decks/${deckId}`} name={deck.name} currentPage={"Add Card"} />
+                <h3>{deck.name}: Add Card</h3>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="name" className="form-label">
-                            Name
-                        </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="name"
-                            name="name"
-                            placeholder="Deck Name"
-                            onChange={handleChange}
-                            value={formData.name}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="description" className="form-label">
-                            Description
+                            Front
                         </label>
                         <textarea
                             type="textarea"
                             className="form-control"
-                            id="description"
-                            name="description"
-                            placeholder="Brief description of the deck"
+                            id="front"
+                            name="front"
+                            placeholder="Front side of card"
                             onChange={handleChange}
-                            value={formData.description}
+                            value={formData.front}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="description" className="form-label">
+                            Back
+                        </label>
+                        <textarea
+                            type="textarea"
+                            className="form-control"
+                            id="back"
+                            name="back"
+                            placeholder="Back side of card"
+                            onChange={handleChange}
+                            value={formData.back}
                         />
                     </div>
                     <button
@@ -97,10 +100,10 @@ export default function AddCard() {
                         type="reset"
                         onClick={handleReset}
                     >
-                        Cancel
+                        Done
                     </button>
                     <button type="submit" onClick={handleSubmit} className="btn btn-primary m-2">
-                        Submit
+                        Save
                     </button>
                 </form>
             </div>
