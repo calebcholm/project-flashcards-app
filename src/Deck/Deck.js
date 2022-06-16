@@ -13,7 +13,7 @@ export default function Deck() {
         async function getDeck() {
             if (deckId) {
                 const foundDeck = await readDeck(deckId);
-                setDeck(() => foundDeck);
+                setDeck(foundDeck);
             }
         }
         getDeck();
@@ -33,11 +33,14 @@ export default function Deck() {
                             <div className="col-3 text-muted">
                                 <p>{deck.cards.length} cards</p>
                             </div>
+                            <div className='mr-2'>
                             <p className='card-text'>{deck.description}</p>
+                            </div>
                             <div className='row'>
-                                <div className='col'>
+                                <div className='col mr-5'>
                                     <Link to={`/decks/${deck.id}/edit`} className='btn btn-secondary mr-2'>Edit</Link>
-                                    <Link to={`/decks/${deck.id}/study`} className='btn btn-primary'>Study</Link>
+                                    <Link to={`/decks/${deck.id}/study`} className='btn btn-primary mr-2'>Study</Link>
+                                    <Link to={`/decks/${deck.id}/cards/new`} className='btn btn-primary mr-2'>Add Cards</Link>
                                 </div>
                                 <div className='row'>
                                     <DeleteDeck deck={deck} />

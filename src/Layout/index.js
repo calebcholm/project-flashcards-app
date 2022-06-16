@@ -45,22 +45,22 @@ function Layout() {
       <Header />
       <div className="container">
         <Switch>
-          <Route path='/decks/new'>
+          <Route exact path='/decks/new'>
             <CreateDeck />
           </Route>
           <Route exact path='/'>
             <DeckList decks={ decks } />
           </Route>
-          <Route path='/decks/:deckId'>
+          <Route exact path='/decks/:deckId'>
             <Deck />
           </Route>
-          <Route path='/decks/:deckId/edit'>
+          <Route exact path='/decks/:deckId/edit'>
             <EditDeck />
           </Route>
-          <Route path='/decks/:deckId/cards/:cardId/edit'>
+          <Route exact path='/decks/:deckId/cards/:cardId/edit'>
             <EditCard />
           </Route>
-          <Route path='/decks/:deckId/cards/new'>
+          <Route exact path='/decks/:deckId/cards/new'>
             <AddCard />
           </Route>
           <Route exact path='/decks/:deckId/study'>
