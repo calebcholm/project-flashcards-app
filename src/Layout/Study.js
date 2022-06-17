@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Nav from './Nav';
+import StudyCard from '../Card/StudyCard';
 import { readDeck } from '../utils/api';
-
-//Routes to '/decks/:deckId/study'
-//Allows the user to study the cards from a specified deck
 
 function Study() {
     const { deckId } = useParams();
@@ -21,11 +20,17 @@ function Study() {
 
     }, [deckId]);
 
-      if (deck.id) {
-          return (
-        <div>Study Deck Component</div>
-          )
-      }
+    if (Object.keys(deck).length) {
+    return (
+        <div>
+            <Nav link={`/decks/${deckId}`} name={deck.name} currentPage={'Study'} />
+            <h1>{deck.name}: Study</h1>
+            <StudyCard cards={deck.cards} />
+        </div>
+    )
+    } else {
+        return `Loading ... `
+    }
 }
 
 export default Study;
