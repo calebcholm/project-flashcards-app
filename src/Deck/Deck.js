@@ -23,7 +23,7 @@ export default function Deck() {
     if (deck.id) {
         return (
             <div>
-                <Nav Link={`/decks/${deckId}`} name={deck.name} currentPage={deck.name} />
+                <Nav name={deck.name} currentPage={deck.name} />
                 <div className="card w-100 my-4">
                     <div className="card-body">
                         <div className="row">
