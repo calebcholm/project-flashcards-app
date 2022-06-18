@@ -19,11 +19,11 @@ export const DeckList = ({ decks }) => {
                             </div>
                             <p className='card-text'>{deck.description}</p>
                             <div className='row'>
-                                <div className='col'>
-                                    <Link to={`/decks/${deck.id}`} className='btn btn-secondary mr-2 fas fa-eye'>View</Link>
-                                    <Link to={`/decks/${deck.id}/study`} className='btn btn-primary'>Study</Link>
+                                <div className='col-12 col-md-10'>
+                                    <Link to={`/decks/${deck.id}`} className='btn btn-secondary mr-2'>View</Link>
+                                    <Link to={`/decks/${deck.id}/study`} className='btn btn-primary mr-2'>Study</Link>
                                 </div>
-                                <div className="col-1">
+                                <div className="col-6 col-md-2">
                                     <DeleteDeck deck={deck} />
                                 </div>
                             </div>
