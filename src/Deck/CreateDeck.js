@@ -32,12 +32,14 @@ export default function CreateDeck() {
 
     createDeck(formData)
       .then((data) => setFormData(data))
+      .then(() => alert('Deck successfully added!'))
+      .then(() => window.location.reload())
       .catch(setError);
   };
 
   useEffect(() => {
     if (formData.id) {
-      history.push(`/decks/${formData.id}`);
+      history.push(`/decks/${formData.id}`)
     }
   }, [formData.id, history]);
 

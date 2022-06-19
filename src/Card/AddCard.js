@@ -51,6 +51,7 @@ export default function AddCard() {
         async function addCard() {
             await createCard(deckId, formData)
                 .then(() => alert(`Card in '${deck.name}' saved! Add another or click Done.`))
+                .then(() => window.location.reload())
                 .then((data) => setFormData({ ...initialState }))
                 .catch(setError);
         }
